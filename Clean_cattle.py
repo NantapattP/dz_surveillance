@@ -3,8 +3,10 @@ import pythainlp
 from pythainlp.ulmfit import process_thai
 from pythainlp.corpus import thai_stopwords
 from pythainlp.tokenize import word_tokenize
+from sklearn.feature_extraction.text import CountVectorizer
 import re
 import emoji
+import matplotlib.pyplot as plt
 
 df = pd.read_csv('cattle.csv', escapechar='\\', quotechar='"', quoting=1)
 df.Time = df.Time.astype('datetime64')                                                          #previous type: object
@@ -2583,16 +2585,19 @@ def cleanText(text):
     stop_word = list(thai_stopwords())
     sentence = word_tokenize(text)
     result = [word for word in sentence if word not in stop_word and " " not in word]
-    return " /".join(result)
+    return text
 
 cleaning = []
 for txt in df['Body']:
     cleaning.append(cleanText(txt))
-cleaning[:]
+cleaning[:10]
 
 df['cleaning'] = cleaning
-new_df = df.drop(columns=['Body'])
+# print(df)
+
+new_df = df.drop(columns=['Body', 'Url'])
+
 print(new_df)
 
 new_df.to_csv('cow.csv', index=False)
-#new_df.to_excel('cow_excel.xlsx', index=False)
+# new_df.to_excel('cow_excel.xlsx', index=False)
