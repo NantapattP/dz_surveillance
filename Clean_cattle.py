@@ -2596,8 +2596,8 @@ df['cleaning'] = cleaning
 # print(df)
 
 new_df = df.drop(columns=['Body', 'Url'])
-
+new_df.reset_index(drop=True, inplace=True)
 print(new_df)
 
-new_df.to_csv('cow.csv', index=False)
+#new_df.to_csv('cow.csv', index=False)
 # new_df.to_excel('cow_excel.xlsx', index=False)
