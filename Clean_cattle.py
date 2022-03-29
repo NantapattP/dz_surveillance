@@ -2578,7 +2578,6 @@ def remove_URL(text):
 
 # df['Body'] = df['Body'].str.replace('[^\w\s#@/:%.,_-]', '', flags=re.UNICODE)
 
-
 def cleanText(text):
     text = str(text)
     text = re.sub('[^ก-๙]','',text)
@@ -2595,9 +2594,22 @@ cleaning[:10]
 df['cleaning'] = cleaning
 # print(df)
 
-new_df = df.drop(columns=['Body', 'Url'])
-new_df.reset_index(drop=True, inplace=True)
-print(new_df)
+#filtering
+FMD = df.loc[(df['cleaning'] == 'fmd') | (df['cleaning'] == 'foot and mouth disease') | (df['cleaning'] == 'ปากและเท้าเปื่อย')]
+print(FMD)
 
-#new_df.to_csv('cow.csv', index=False)
+LSD = df.loc[(df['cleaning'] == 'ลัมปีสกิน') | (df['cleaning'] == 'lumpy skin disease')]
+print(LSD)
+
+Animal = df.loc[(df['cleaning'] == 'วัวป่วย') | (df['cleaning'] == 'วัว') | (df['cleaning'] == 'โค')]
+print(Animal)
+
+DLD = df.loc[(df['cleaning'] == 'ปศุสัตว์')]
+print(DLD)
+
+# new_df = df.drop(columns=['Body', 'Url'])
+# new_df.reset_index(drop=True, inplace=True)
+# print(new_df)
+#
+# new_df.to_csv('cow.csv', index=False)
 # new_df.to_excel('cow_excel.xlsx', index=False)
