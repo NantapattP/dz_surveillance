@@ -2595,7 +2595,7 @@ df['cleaning'] = cleaning
 # print(df)
 
 #filtering
-FMD = df.loc[(df['cleaning'] == 'fmd') | (df['cleaning'] == 'foot and mouth disease') | (df['cleaning'] == 'ปากและเท้าเปื่อย')]
+FMD = df.loc[(df['cleaning'] == 'fmd') | (df['cleaning'] == 'Foot and mouth disease') | (df['cleaning'] == 'ปากและเท้าเปื่อย')]
 print(FMD)
 
 LSD = df.loc[(df['cleaning'] == 'ลัมปีสกิน') | (df['cleaning'] == 'lumpy skin disease')]
@@ -2606,6 +2606,7 @@ print(Animal)
 
 DLD = df.loc[(df['cleaning'] == 'ปศุสัตว์')]
 print(DLD)
+
 
 # new_df = df.drop(columns=['Body', 'Url'])
 # new_df.reset_index(drop=True, inplace=True)
