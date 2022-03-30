@@ -2605,13 +2605,11 @@ LSD1 = df.loc[df['cleaning'].str.contains('ลัมปีสกิน|ลัม
 # print(LSD1)
 All2 = pd.merge(FMD1, LSD1, left_index=False, right_index=False, how="outer")
 # print(All2)
-
 Animal_only = df.loc[~(df['cleaning'].isin(All2['cleaning']))]
-print(Animal_only)
+# print(Animal_only)
 
 # DLD = df.loc[df['cleaning'].str.contains('ปศุสัตว์')]
 # print(DLD)
-
 
 # new_df = df.drop(columns=['Body', 'Url'])
 # new_df.reset_index(drop=True, inplace=True)

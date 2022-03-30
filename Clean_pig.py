@@ -2597,8 +2597,7 @@ df['cleaning'] = cleaning
 #filtering
 ASF = df.loc[df['cleaning'].str.contains('ASF|African swine fever|อหิวาต์แอฟริกา', regex=True)]
 # print(ASF)
-
-Animal_only = df.loc[~(ASF['cleaning'])]
+Animal_only = df.loc[~(df['cleaning'].isin(ASF['cleaning']))]
 # print(Animal_only)
 
 
