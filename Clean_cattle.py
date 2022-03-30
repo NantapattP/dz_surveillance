@@ -2594,18 +2594,23 @@ cleaning[:10]
 df['cleaning'] = cleaning
 # print(df)
 
+df.dropna(inplace=True)
+
 #filtering
-FMD = df.loc[(df['cleaning'] == 'fmd') | (df['cleaning'] == 'Foot and mouth disease') | (df['cleaning'] == 'ปากและเท้าเปื่อย')]
-print(FMD)
 
-LSD = df.loc[(df['cleaning'] == 'ลัมปีสกิน') | (df['cleaning'] == 'lumpy skin disease')]
-print(LSD)
+FMD1 = df.loc[df['cleaning'].str.contains('FMD|Foot and mouth disease|ปากและเท้าเปื่อย', regex=True)]
+# print(FMD1)
 
-Animal = df.loc[(df['cleaning'] == 'วัวป่วย') | (df['cleaning'] == 'วัว') | (df['cleaning'] == 'โค')]
-print(Animal)
+LSD1 = df.loc[df['cleaning'].str.contains('ลัมปีสกิน|ลัมปีสกีน|lumpy skin disease|LSD', regex=True)]
+# print(LSD1)
+All2 = pd.merge(FMD1, LSD1, left_index=False, right_index=False, how="outer")
+# print(All2)
 
-DLD = df.loc[(df['cleaning'] == 'ปศุสัตว์')]
-print(DLD)
+Animal_only = df.loc[~(df['cleaning'].isin(All2['cleaning']))]
+print(Animal_only)
+
+# DLD = df.loc[df['cleaning'].str.contains('ปศุสัตว์')]
+# print(DLD)
 
 
 # new_df = df.drop(columns=['Body', 'Url'])

@@ -2595,14 +2595,11 @@ cleaning[:10]
 df['cleaning'] = cleaning
 
 #filtering
-ASF = df.loc[(df['cleaning'] == 'ASF') | (df['cleaning'] == 'African swine fever') | (df['cleaning'] == 'อหิวาต์แอฟริกาในสุกร') | (df['cleaning'] == 'อหิวาต์แอฟริกา')]
-print(ASF)
+ASF = df.loc[df['cleaning'].str.contains('ASF|African swine fever|อหิวาต์แอฟริกา', regex=True)]
+# print(ASF)
 
-Animal = df.loc[(df['cleaning'] == 'หมูป่วย') | (df['cleaning'] == 'หมู') | (df['cleaning'] == 'สุกร')]
-print(Animal)
-
-DLD = df.loc[(df['cleaning'] == 'ปศุสัตว์')]
-print(DLD)
+Animal_only = df.loc[~(ASF['cleaning'])]
+# print(Animal_only)
 
 
 # new_df = df.drop(columns = ['Body', 'Url'])
