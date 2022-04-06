@@ -7,11 +7,12 @@ from sklearn.feature_extraction.text import CountVectorizer
 import re
 import emoji
 import matplotlib.pyplot as plt
+import numpy as np
 
 df = pd.read_csv('cattle.csv', escapechar='\\', quotechar='"', quoting=1)
-df.Time = df.Time.astype('datetime64')                                                          #previous type: object
+df.Time = df.Time.astype('datetime64')                              #previous type: object
 df.sort_values(['Media Type', 'Feed Type', 'Keyword', 'Time'], inplace=True)
-df.drop(columns=['Url'])
+df.drop(columns=['Url'], inplace=True)
 
 #text cleaning
 
@@ -2599,17 +2600,37 @@ df.dropna(inplace=True)
 #filtering
 
 FMD1 = df.loc[df['cleaning'].str.contains('FMD|Foot and mouth disease|ปากและเท้าเปื่อย', regex=True)]
+# FMD1.set_index("Time", inplace=True)
 # print(FMD1)
+# FMD = FMD1.groupby('Time').Keyword.value_counts()
+# FMD = FMD1.groupby('Time').count()
+# FMD1['Freq'] = FMD1.groupby(by = 'Time')['Keyword'].transform('count')
+# print(FMD)
+
+# set date to Y-M-D
+# group and count and sum
+# plot
+
 
 LSD1 = df.loc[df['cleaning'].str.contains('ลัมปีสกิน|ลัมปีสกีน|lumpy skin disease|LSD', regex=True)]
-# print(LSD1)
+# LSD = LSD1.groupby('Time').Keyword.value_counts()
+# LSD1.set_index("Time", inplace=True)
+# print(LSD)
+
 All2 = pd.merge(FMD1, LSD1, left_index=False, right_index=False, how="outer")
 # print(All2)
+
 Animal_only = df.loc[~(df['cleaning'].isin(All2['cleaning']))]
+Animal = Animal_only.groupby('Time').Keyword.value_counts()
+
+# Animal_only.set_index("Time", inplace=True)
 # print(Animal_only)
 
-# DLD = df.loc[df['cleaning'].str.contains('ปศุสัตว์')]
-# print(DLD)
+# plt.plot(LSD1.Time, LSD1.Keyword)
+# plt.plot(Animal_only.Time, Animal_only.Keyword)
+# plt.show()
+
+
 
 # new_df = df.drop(columns=['Body', 'Url'])
 # new_df.reset_index(drop=True, inplace=True)
@@ -2617,3 +2638,15 @@ Animal_only = df.loc[~(df['cleaning'].isin(All2['cleaning']))]
 #
 # new_df.to_csv('cow.csv', index=False)
 # new_df.to_excel('cow_excel.xlsx', index=False)
+
+# LSD1.reset_index(drop=True, inplace=True)
+# LSD1.to_csv('LSD.csv', index=False)
+#
+# FMD1.reset_index(drop=True, inplace=True)
+# FMD1.to_csv('LSD.csv', index=False)
+#
+# Animal_only.reset_index(drop=True, inplace=True)
+# Animal_only.to_csv('LSD.csv', index=False)
+
+# clean_cow = [FMD1,LSD1,Animal_only]
+pd.concat([FMD1,LSD1,Animal_only], axis=0).to_csv('clean_cow.csv', index=False, header=True, encoding='utf-8')

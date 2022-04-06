@@ -7,11 +7,14 @@ from sklearn.feature_extraction.text import CountVectorizer
 import re
 import emoji
 import matplotlib.pyplot as plt
+import numpy as np
+
 
 df = pd.read_csv('pig.csv', escapechar='\\', quotechar='"', quoting=1)
 # df.Time = df.Time.astype('datetime64')                                                          #previous type: object
-df.sort_values(['Media Type', 'Feed Type', 'Keyword', 'Time'], inplace=True)
-df.drop(columns=['Url'])
+df.sort_values(['Media Type', 'Feed Type', 'Keyword'], inplace=True)
+df.drop(columns=['Url'], inplace=True)
+# df['Time'] = pd.to_datetime(df["Time"])
 
 #text cleaning
 
@@ -2596,9 +2599,16 @@ df['cleaning'] = cleaning
 
 #filtering
 ASF = df.loc[df['cleaning'].str.contains('ASF|African swine fever|อหิวาต์แอฟริกา', regex=True)]
+# ASF.set_index("Time", inplace=True)
 # print(ASF)
 Animal_only = df.loc[~(df['cleaning'].isin(ASF['cleaning']))]
+# Animal_only.set_index("Time", inplace=True)
 # print(Animal_only)
+
+#plot
+
+# plt.plot(ASF.Keyword, Animal_only.Keyword)
+# plt.show()
 
 
 # new_df = df.drop(columns = ['Body', 'Url'])
