@@ -4,7 +4,7 @@ import matplotlib.dates as mdates
 import numpy as np
 
 df = pd.read_csv('clean_cow.csv')
-df['Time'] = pd.to_datetime(df['Time'], format='%Y-%m-%d', utc=False)
+df['Time'] = pd.to_datetime(df['Time'], format='%Y-%m-%d', utc=False).dt.date
 df.sort_values([ 'Time','Keyword'], inplace=True)
 df.drop(columns=['Body','cleaning'], inplace=True)
 df.dropna(inplace=True)
