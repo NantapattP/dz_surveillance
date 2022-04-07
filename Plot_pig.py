@@ -39,6 +39,6 @@ plt.ylabel('Total/day')
 
 plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m-%d'))
 
-plt.savefig('cow_disease', dpi=300)
+plt.savefig('pig_disease', dpi=300)
 
 plt.show()
