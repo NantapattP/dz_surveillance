@@ -2605,6 +2605,9 @@ Animal_only = df.loc[~(df['cleaning'].isin(ASF['cleaning']))]
 # Animal_only.set_index("Time", inplace=True)
 # print(Animal_only)
 
+pd.concat([ASF,Animal_only], axis=0).to_csv('clean_cow.csv', index=False, header=True, encoding='utf-8')
+
+
 #plot
 
 # plt.plot(ASF.Keyword, Animal_only.Keyword)

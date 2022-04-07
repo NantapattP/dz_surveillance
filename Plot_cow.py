@@ -25,7 +25,7 @@ plt.figure(figsize=(15,5))
 
 plt.plot(FMD.Time, FMD.freq_perday, label='FMD')
 plt.plot(LSD.Time, LSD.freq_perday, label='LSD')
-plt.plot(Animal_only.Time, Animal_only.freq_perday, label='Animal')
+plt.plot(Animal_only.Time, Animal_only.freq_perday, label='Sick cow')
 
 plt.legend()
 
