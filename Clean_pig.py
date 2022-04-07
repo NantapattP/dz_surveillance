@@ -11,10 +11,8 @@ import numpy as np
 
 
 df = pd.read_csv('pig.csv', escapechar='\\', quotechar='"', quoting=1)
-# df.Time = df.Time.astype('datetime64')                                                          #previous type: object
 df.sort_values(['Media Type', 'Feed Type', 'Keyword'], inplace=True)
 df.drop(columns=['Url'], inplace=True)
-# df['Time'] = pd.to_datetime(df["Time"])
 
 #text cleaning
 
@@ -2599,23 +2597,8 @@ df['cleaning'] = cleaning
 
 #filtering
 ASF = df.loc[df['cleaning'].str.contains('ASF|African swine fever|อหิวาต์แอฟริกา', regex=True)]
-# ASF.set_index("Time", inplace=True)
-# print(ASF)
 Animal_only = df.loc[~(df['cleaning'].isin(ASF['cleaning']))]
-# Animal_only.set_index("Time", inplace=True)
-# print(Animal_only)
 
 pd.concat([ASF,Animal_only], axis=0).to_csv('clean_pig.csv', index=False, header=True, encoding='utf-8')
 
 
-#plot
-
-# plt.plot(ASF.Keyword, Animal_only.Keyword)
-# plt.show()
-
-
-# new_df = df.drop(columns = ['Body', 'Url'])
-# print(new_df)
-#
-# new_df.to_csv('swine.csv', index=False)
-# new_df.to_excel('swine_excel.xlsx', index=False)

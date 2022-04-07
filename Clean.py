@@ -12,7 +12,7 @@ df.reset_index(drop=True, inplace=True)
 print(df)
 
 # df.to_csv('cattle.csv', index=False)
-# df.to_excel('cattle_excel.xlsx', index=False)
+
 
 #pig df
 new_df = df.loc[(df['Keyword'] == 'ASF') | (df['Keyword'] == 'African swine fever') | (df['Keyword'] == 'อหิวาต์แอฟริกาในสุกร') | (df['Keyword'] == 'หมูป่วย')]
@@ -21,4 +21,4 @@ new_df.reset_index(inplace =True, drop=True)
 print(new_df)
 
 # new_df.to_csv('pig.csv', index=False)
-# new_df.to_excel('pig_excel.xlsx', index=False)
+

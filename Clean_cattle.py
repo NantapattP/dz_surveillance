@@ -2626,27 +2626,5 @@ Animal = Animal_only.groupby('Time').Keyword.value_counts()
 # Animal_only.set_index("Time", inplace=True)
 # print(Animal_only)
 
-# plt.plot(LSD1.Time, LSD1.Keyword)
-# plt.plot(Animal_only.Time, Animal_only.Keyword)
-# plt.show()
 
-
-
-# new_df = df.drop(columns=['Body', 'Url'])
-# new_df.reset_index(drop=True, inplace=True)
-# print(new_df)
-#
-# new_df.to_csv('cow.csv', index=False)
-# new_df.to_excel('cow_excel.xlsx', index=False)
-
-# LSD1.reset_index(drop=True, inplace=True)
-# LSD1.to_csv('LSD.csv', index=False)
-#
-# FMD1.reset_index(drop=True, inplace=True)
-# FMD1.to_csv('LSD.csv', index=False)
-#
-# Animal_only.reset_index(drop=True, inplace=True)
-# Animal_only.to_csv('LSD.csv', index=False)
-
-# clean_cow = [FMD1,LSD1,Animal_only]
 pd.concat([FMD1,LSD1,Animal_only], axis=0).to_csv('clean_cow.csv', index=False, header=True, encoding='utf-8')
